@@ -7,7 +7,7 @@ import POSTS from '../_mocks_/course';
 
 export const Course = () => {
   return (
-    <Page title="Dashboard: Blog | Minimal-UI">
+    <Page title="Curso | Proyecto educativo">
       <Container>
         <Grid container spacing={3}>
           {POSTS.map((post, index) => (
