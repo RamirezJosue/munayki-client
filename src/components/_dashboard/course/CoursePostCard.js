@@ -54,6 +54,20 @@ const CoverImgStyle = styled('img')({
   position: 'absolute',
 });
 
+const CourseCard = styled(Card)({
+  marginTop: '20px',
+  position: 'relative',
+  width: '100%',
+  minHeight: '400px',
+  display: 'flex',
+  justifyContent: 'space-between',
+
+  '@media (max-width: 767px)': {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+});
+
 // ----------------------------------------------------------------------
 
 CoursePostCard.propTypes = {
@@ -73,12 +87,7 @@ export default function CoursePostCard({ post, index }) {
   };
 
   return (
-    <Grid
-      item
-      xs={12}
-      sm={latestPostLarge ? 12 : 12}
-      md={latestPostLarge ? 12 : 12}
-    >
+    <Grid item xs={12}>
       <Card sx={{ position: 'relative', maxHeight: '370px' }}>
         <CardMediaStyle
           sx={{
@@ -181,27 +190,19 @@ export default function CoursePostCard({ post, index }) {
           </Typography>
         </CardContent>
       </Card>
-      <Card
-        sx={{
-          marginTop: '20px',
-          position: 'relative',
-          width: '100%',
-          height: '325px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
+      <CourseCard>
         <CardMedia
           component="iframe"
           src={'https://www.youtube.com/embed/_GH3GzjMb0A'}
           title="Video 01"
-          frameborder="0"
+          frameBorder="0"
           allowFullScreen
-          sx={{ width: '50%' }}
+          height="400"
+          sx={{ width: '100%' }}
         />
         <List
           sx={{
-            width: '50%',
+            width: '100%',
             bgcolor: 'background.paper',
             paddingTop: '20px',
             paddingX: '20px',
@@ -238,7 +239,7 @@ export default function CoursePostCard({ post, index }) {
             </List>
           </Collapse>
         </List>
-      </Card>
+      </CourseCard>
     </Grid>
   );
 }
