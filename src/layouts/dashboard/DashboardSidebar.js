@@ -37,9 +37,7 @@ const AccountStyle = styled('div')(({ theme }) => ({
 
 export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.auth);
-
+  const { name } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -67,7 +65,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {name}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}

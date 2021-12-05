@@ -1,18 +1,34 @@
 import { GlobalStyles } from '@mui/styled-engine';
-import { Provider } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRoutes } from 'react-router-dom';
+
 import { ScrollToTop } from './components/ScrollToTop';
-import { Router } from './routes';
-import { store } from './store/store';
+import { routes } from './routes';
+import { startChecking } from './store/actions/auth';
+
 import ThemeConfig from './theme';
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(startChecking());
+  }, [dispatch]);
+
+  const { isLoggedIn, checking } = useSelector(state => state.auth);
+  const routing = useRoutes(routes(isLoggedIn));
+  
+  if (checking) {
+    return (<h5>Espere...</h5>);
+  }
+  
   return (
     <ThemeConfig>
       <ScrollToTop />
       <GlobalStyles />
-      <Provider store={ store }>
-        <Router />
-      </Provider>
+       {routing}
     </ThemeConfig>
   );
 }
