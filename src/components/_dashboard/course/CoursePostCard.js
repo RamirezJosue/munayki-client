@@ -21,6 +21,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 // ----------------------------------------------------------------------
 
@@ -68,6 +70,39 @@ const CourseCard = styled(Card)({
   },
 });
 
+const StyledTabs = styled((props) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    width: '100%',
+    backgroundColor: '#78D9EC',
+  },
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: theme.typography.pxToRem(15),
+    marginRight: theme.spacing(1),
+    color: '#fff',
+    '&.Mui-selected': {
+      color: '#78D9EC',
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: 'rgba(100, 95, 228, 0.32)',
+    },
+  })
+);
+
 // ----------------------------------------------------------------------
 
 CoursePostCard.propTypes = {
@@ -86,6 +121,12 @@ export default function CoursePostCard({ post, index }) {
     setOpen(!open);
   };
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Grid item xs={12}>
       <Card sx={{ position: 'relative', maxHeight: '370px' }}>
@@ -99,7 +140,7 @@ export default function CoursePostCard({ post, index }) {
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.42),
+                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.56),
               },
             }),
             ...(latestPostLarge && {
@@ -128,7 +169,7 @@ export default function CoursePostCard({ post, index }) {
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
-                top: 290,
+                top: 220,
                 left: 24,
                 width: 60,
                 height: 60,
@@ -181,15 +222,26 @@ export default function CoursePostCard({ post, index }) {
             variant="subtitle2"
             sx={{
               paddingLeft: '80px',
-              paddingBottom: '15px',
+              paddingBottom: '40px',
               color: 'white',
               display: 'block',
             }}
           >
             {author.name}
           </Typography>
+          <StyledTabs
+            value={value}
+            onChange={handleChange}
+            aria-label="nav tabs example"
+          >
+            <StyledTab label="Conceptos" href="#" />
+            <StyledTab label="Apuntes" href="#" />
+            <StyledTab label="Practicas" href="#" />
+            <StyledTab label="Tarea" href="#" />
+          </StyledTabs>
         </CardContent>
       </Card>
+
       <CourseCard>
         <CardMedia
           component="iframe"
