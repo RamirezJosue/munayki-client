@@ -16,8 +16,12 @@ import {
     FormControlLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useDispatch } from 'react-redux';
+import { startLogin } from '../../store/actions/auth';
 
 export const LoginForm = () => {
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -33,7 +37,9 @@ export const LoginForm = () => {
             remember: true
         },
         validationSchema: LoginSchema,
-        onSubmit: () => {
+        onSubmit: async ({cedula, password}) => {
+            // console.log(cedula, password)
+            dispatch( startLogin( cedula, password ) );
             navigate('/dashboard', { replace: true })
         }
     });

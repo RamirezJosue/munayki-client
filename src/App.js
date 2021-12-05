@@ -1,6 +1,8 @@
 import { GlobalStyles } from '@mui/styled-engine';
+import { Provider } from 'react-redux';
 import { ScrollToTop } from './components/ScrollToTop';
 import { Router } from './routes';
+import { store } from './store/store';
 import ThemeConfig from './theme';
 
 function App() {
@@ -8,7 +10,9 @@ function App() {
     <ThemeConfig>
       <ScrollToTop />
       <GlobalStyles />
-      <Router />
+      <Provider store={ store }>
+        <Router />
+      </Provider>
     </ThemeConfig>
   );
 }

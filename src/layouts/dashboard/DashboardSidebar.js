@@ -14,6 +14,8 @@ import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
 import { NavSection } from '../../components/NavSection';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -35,6 +37,9 @@ const AccountStyle = styled('div')(({ theme }) => ({
 
 export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth);
+
 
   useEffect(() => {
     if (isOpenSidebar) {
