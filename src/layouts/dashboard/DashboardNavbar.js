@@ -5,8 +5,8 @@ import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 // components
-import { NotificationsPopover } from './NotificationsPopover';
-import { LanguagePopover } from './LanguagePopover';
+// import { NotificationsPopover } from './NotificationsPopover';
+// import { LanguagePopover } from './LanguagePopover';
 import { AccountPopover } from './AccountPopover';
 import { MHidden } from '../../components/@material-extend/MHidden';
 import { Searchbar } from './Searchbar';
@@ -48,8 +48,8 @@ export const DashboardNavbar = ({ onOpenSidebar }) => {
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <LanguagePopover />
-          <NotificationsPopover />
+          {/* <LanguagePopover /> */}
+          {/* <NotificationsPopover /> */}
           <AccountPopover />
         </Stack>
       </ToolbarStyle>

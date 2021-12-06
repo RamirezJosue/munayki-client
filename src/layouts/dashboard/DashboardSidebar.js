@@ -14,7 +14,7 @@ import sidebarConfig from './SidebarConfig';
 import account from '../../_mocks_/account';
 import { NavSection } from '../../components/NavSection';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 

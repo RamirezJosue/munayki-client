@@ -12,30 +12,39 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 //
 import account from '../../_mocks_/account';
 import { MenuPopover } from '../../components/MenuPopover';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLogout } from '../../store/actions/auth';
 
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
+    label: 'Inicio',
     icon: homeFill,
-    linkTo: '/'
+    linkTo: '#'
   },
   {
-    label: 'Profile',
+    label: 'Perfil',
     icon: personFill,
     linkTo: '#'
   },
   {
-    label: 'Settings',
+    label: 'Configuraciones',
     icon: settings2Fill,
     linkTo: '#'
   }
 ];
 
 export const AccountPopover = () => {
+
+  const dispatch = useDispatch();
+  const { name } = useSelector(state => state.auth);
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    dispatch(startLogout());
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,11 +86,11 @@ export const AccountPopover = () => {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {name}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          {/* <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}
-          </Typography>
+          </Typography> */}
         </Box>
 
         <Divider sx={{ my: 1 }} />
@@ -109,8 +118,8 @@ export const AccountPopover = () => {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
-            Logout
+          <Button fullWidth color="inherit" variant="outlined" onClick={handleLogout}>
+            Salir
           </Button>
         </Box>
       </MenuPopover>

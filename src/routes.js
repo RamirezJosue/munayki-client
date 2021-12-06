@@ -28,11 +28,11 @@ export const routes = (isLoggedIn) => [
     },
     {
         path: '/',
-        element: !isLoggedIn ? <LogoOnlyLayout /> : <Navigate to="/dashboard" />,
+        element: !isLoggedIn ? <LogoOnlyLayout /> : <Navigate to="/dashboard/app" />,
         children: [
             { path: 'login', element: <Login /> },
             { path: '404', element: <Page404 /> },
-            { path: '/', element: <Navigate to="/dashboard" /> },
+            { path: '/', element: <Navigate to="/dashboard/app" /> },
             { path: '*', element: <Navigate to="/404" /> },
         ],
     },

@@ -22,8 +22,6 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-// ----------------------------------------------------------------------
-
 const CardMediaStyle = styled('div')({
   position: 'relative',
   paddingTop: 'calc(100% * 3 / 4)',
@@ -68,9 +66,13 @@ export default function CoursePostCard({ post, index }) {
 
   const [open, setOpen] = React.useState(true);
 
+  const video = "https://www.youtube.com/embed/_GH3GzjMb0A";
+
   const handleClick = () => {
     setOpen(!open);
   };
+
+  
 
   return (
     <Grid
@@ -193,9 +195,8 @@ export default function CoursePostCard({ post, index }) {
       >
         <CardMedia
           component="iframe"
-          src={'https://www.youtube.com/embed/_GH3GzjMb0A'}
+          src={video}
           title="Video 01"
-          frameborder="0"
           allowFullScreen
           sx={{ width: '50%' }}
         />

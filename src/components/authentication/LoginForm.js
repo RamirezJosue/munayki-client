@@ -38,9 +38,8 @@ export const LoginForm = () => {
         },
         validationSchema: LoginSchema,
         onSubmit: async ({cedula, password}) => {
-            // console.log(cedula, password)
             dispatch( startLogin( cedula, password ) );
-            navigate('/dashboard', { replace: true })
+            navigate('/', { replace: true })
         }
     });
 
