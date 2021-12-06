@@ -38,7 +38,7 @@ export const Login = () => {
                     <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
                         Hola, Bienvenido de nuevo
                     </Typography>
-                    <img src="/static/illustrations/illustration_login.png" alt="login" />
+                    <img src="/static/illustrations/illustration_login.jpeg" alt="login" />
                 </SectionStyle>
             </MHidden>
             <Container maxWidth="sm">

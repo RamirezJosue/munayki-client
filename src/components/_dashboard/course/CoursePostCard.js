@@ -21,6 +21,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 const CardMediaStyle = styled('div')({
   position: 'relative',
@@ -52,6 +54,53 @@ const CoverImgStyle = styled('img')({
   position: 'absolute',
 });
 
+const CourseCard = styled(Card)({
+  marginTop: '20px',
+  position: 'relative',
+  width: '100%',
+  minHeight: '400px',
+  display: 'flex',
+  justifyContent: 'space-between',
+
+  '@media (max-width: 767px)': {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+});
+
+const StyledTabs = styled((props) => (
+  <Tabs
+    {...props}
+    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+  />
+))({
+  '& .MuiTabs-indicator': {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  '& .MuiTabs-indicatorSpan': {
+    width: '100%',
+    backgroundColor: '#78D9EC',
+  },
+});
+
+const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
+  ({ theme }) => ({
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: theme.typography.pxToRem(15),
+    marginRight: theme.spacing(1),
+    color: '#fff',
+    '&.Mui-selected': {
+      color: '#78D9EC',
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: 'rgba(100, 95, 228, 0.32)',
+    },
+  })
+);
+
 // ----------------------------------------------------------------------
 
 CoursePostCard.propTypes = {
@@ -72,15 +121,14 @@ export default function CoursePostCard({ post, index }) {
     setOpen(!open);
   };
 
-  
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <Grid
-      item
-      xs={12}
-      sm={latestPostLarge ? 12 : 12}
-      md={latestPostLarge ? 12 : 12}
-    >
+    <Grid item xs={12}>
       <Card sx={{ position: 'relative', maxHeight: '370px' }}>
         <CardMediaStyle
           sx={{
@@ -92,7 +140,7 @@ export default function CoursePostCard({ post, index }) {
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.42),
+                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.56),
               },
             }),
             ...(latestPostLarge && {
@@ -121,7 +169,7 @@ export default function CoursePostCard({ post, index }) {
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
-                top: 290,
+                top: 220,
                 left: 24,
                 width: 60,
                 height: 60,
@@ -174,35 +222,38 @@ export default function CoursePostCard({ post, index }) {
             variant="subtitle2"
             sx={{
               paddingLeft: '80px',
-              paddingBottom: '15px',
+              paddingBottom: '40px',
               color: 'white',
               display: 'block',
             }}
           >
             {author.name}
           </Typography>
+          <StyledTabs
+            value={value}
+            onChange={handleChange}
+            aria-label="nav tabs example"
+          >
+            <StyledTab label="Conceptos" href="#" />
+            <StyledTab label="Apuntes" href="#" />
+            <StyledTab label="Practicas" href="#" />
+            <StyledTab label="Tarea" href="#" />
+          </StyledTabs>
         </CardContent>
       </Card>
-      <Card
-        sx={{
-          marginTop: '20px',
-          position: 'relative',
-          width: '100%',
-          height: '325px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
+
+      <CourseCard>
         <CardMedia
           component="iframe"
           src={video}
           title="Video 01"
           allowFullScreen
-          sx={{ width: '50%' }}
+          height="400"
+          sx={{ width: '100%' }}
         />
         <List
           sx={{
-            width: '50%',
+            width: '100%',
             bgcolor: 'background.paper',
             paddingTop: '20px',
             paddingX: '20px',
@@ -239,7 +290,7 @@ export default function CoursePostCard({ post, index }) {
             </List>
           </Collapse>
         </List>
-      </Card>
+      </CourseCard>
     </Grid>
   );
 }
